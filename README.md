@@ -29,7 +29,7 @@
 - Swagger + Knife4j 接口文档  --> Knife4jConfig  √
   - @Api + @ApiOperation使用  访问localhost:9090/doc.html  
 - 自定义权限注解 + 全局校验 (暂定处理) 
-- JWT令牌生成 登录身份验证   --> JWTUtils  
+- JWT令牌生成 登录身份验证   --> JWTUtils 身份验证成功后,将当前用户的Id存放到 ThreadLocal中方便当前整个线程的使用
 - Redis中Key - Value值的序列化和反序列化
 - Easy Excel 表格处理 
 

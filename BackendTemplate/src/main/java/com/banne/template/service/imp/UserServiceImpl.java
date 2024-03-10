@@ -3,6 +3,8 @@ package com.banne.template.service.imp;
 
 import com.banne.template.common.enumeration.ResultCodeEnum;
 import com.banne.template.common.exception.BusinessException;
+import com.banne.template.common.properties.JwtProperties;
+import com.banne.template.common.utils.JwtUtil;
 import com.banne.template.mapper.UserMapper;
 import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
@@ -12,10 +14,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
 * @author 86188
@@ -26,6 +32,12 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService {
+
+    @Resource
+    private JwtProperties jwtProperties;
+
+    @Resource
+    private RedisTemplate<String,String> redisTemplate;
 
     /**
      * 盐值，混淆密码
@@ -56,6 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
         queryWrapper.eq("userPassword", encryptPassword);
+        // 进行登录校验
         User user = this.baseMapper.selectOne(queryWrapper);
         // 用户不存在 null / ""
         if (ObjectUtils.isEmpty(user)) {
@@ -65,7 +78,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 3. 记录用户的登录态  todo
         // request.getSession().setAttribute(USER_LOGIN_STATE, user);
 
-        return this.getLoginUserVO(user);
+        // 登录成功后,生成JWT令牌,并存放到Redis数据库中(当令牌泄漏时,可以通过撤销Redis中的令牌避免他人违规操作)
+
+        // 将当前登录的用户id存放入令牌中
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        String jwtToken = JwtUtil.createJWT(jwtProperties.getKey(), jwtProperties.getTtlMillis(), claims);
+
+        // 存放入Redis中
+        redisTemplate.opsForValue().set("jwtToken: ",jwtToken);
+
+        // 4. 返回结果
+        return this.getLoginUserVO(user,jwtToken);
     }
 
     @Override
@@ -113,12 +137,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param user
      * @return
      */
-    public LoginUserVO getLoginUserVO(User user) {
+    public LoginUserVO getLoginUserVO(User user,String jwtToken) {
         if (ObjectUtils.isEmpty(user)) {
             return null;
         }
         LoginUserVO loginUserVO = new LoginUserVO();
         BeanUtils.copyProperties(user, loginUserVO);
+        loginUserVO.setJwtToken(jwtToken);
         return loginUserVO;
     }
 }

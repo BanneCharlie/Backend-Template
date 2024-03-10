@@ -87,6 +87,10 @@ knife4j:
         api-rule-resources:
           - com.banne.controller
 
+jwt:
+  key: harvey is my beset friends, what can i say?
+  ttlMillis: 7200000
+
 # todo COS腾讯云对象存储   OSS阿里云对象存储  Minio本地对象存储
 #cos:
 #  client:

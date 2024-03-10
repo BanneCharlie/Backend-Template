@@ -46,6 +46,7 @@ public class UserController {
         }
 
         LoginUserVO loginUserVO = userService.userLogin(userAccount, userPassword, request);
+
         return Result.build(loginUserVO,ResultCodeEnum.SUCCESS);
     }
 
@@ -71,4 +72,10 @@ public class UserController {
         return Result.build(result,ResultCodeEnum.SUCCESS);
     }
 
+
+    @GetMapping
+    @ApiOperation(value = "获取用户列表")
+    public Result<String> getUserList() {
+        return Result.build("获取用户列表",ResultCodeEnum.SUCCESS);
+    }
 }

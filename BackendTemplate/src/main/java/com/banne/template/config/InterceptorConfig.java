@@ -1,10 +1,12 @@
 package com.banne.template.config;
 
 import com.banne.template.interceptor.GlobalInterceptor;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 
+@Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
     @Resource
     public GlobalInterceptor globalInterceptor;
