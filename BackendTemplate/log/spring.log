@@ -631,3 +631,65 @@ execution(* com.banne.template.controller.*.*(..)) && @@annotation(com.banne.tem
 2024-03-10 16:43:43.763 ERROR 20224 --- [http-nio-9090-exec-2] c.b.t.interceptor.GlobalInterceptor      : ThreadLocal中存放的内容 1766671209082245121
 2024-03-10 16:43:43.782 ERROR 20224 --- [http-nio-9090-exec-2] c.b.template.interceptor.LogInterceptor  : 监视重要的操作 request start，id: 683a43b0-ceb3-41a2-bf9a-c77bee05b26c, path: /user, ip: 0:0:0:0:0:0:0:1, params: [], userId: 1766671209082245121,操作的方法: getUserList
 2024-03-10 16:43:43.786  INFO 20224 --- [http-nio-9090-exec-2] c.b.template.interceptor.LogInterceptor  : request end, id: 683a43b0-ceb3-41a2-bf9a-c77bee05b26c, cost: 10ms
+2024-03-10 16:50:00.700  INFO 20224 --- [restartedMain] com.banne.MainApplication                : Starting MainApplication using Java 17.0.10 on BanneTien with PID 20224 (G:\LearningText\15.BackendTemplate\BackendTemplate\target\classes started by 86188 in G:\LearningText\15.BackendTemplate)
+2024-03-10 16:50:00.700  INFO 20224 --- [restartedMain] com.banne.MainApplication                : No active profile set, falling back to 1 default profile: "dev"
+2024-03-10 16:50:00.935  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:00.935  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+2024-03-10 16:50:00.939  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 Elasticsearch repository interfaces.
+2024-03-10 16:50:00.940  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:00.940  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+2024-03-10 16:50:00.942  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Reactive Elasticsearch repository interfaces.
+2024-03-10 16:50:00.945  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:00.945  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-03-10 16:50:00.948  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-03-10 16:50:01.078  INFO 20224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2024-03-10 16:50:01.078  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.37] using APR version [1.7.4].
+2024-03-10 16:50:01.078  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+2024-03-10 16:50:01.078  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2024-03-10 16:50:01.078  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1u  30 May 2023]
+2024-03-10 16:50:01.079  INFO 20224 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-10 16:50:01.079  INFO 20224 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2024-03-10 16:50:01.098  INFO 20224 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-10 16:50:01.098  INFO 20224 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 396 ms
+2024-03-10 16:50:01.481  INFO 20224 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-03-10 16:50:01.546  INFO 20224 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
+2024-03-10 16:50:01.654  WARN 20224 --- [restartedMain] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-03-10 16:50:01.743  INFO 20224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2024-03-10 16:50:01.743  INFO 20224 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Documentation plugins bootstrapped
+2024-03-10 16:50:01.744  INFO 20224 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 2 custom documentation plugin(s)
+2024-03-10 16:50:01.748  INFO 20224 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2024-03-10 16:50:01.751  INFO 20224 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2024-03-10 16:50:01.776  INFO 20224 --- [restartedMain] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-03-10 16:50:01.777  INFO 20224 --- [restartedMain] com.banne.MainApplication                : Started MainApplication in 1.106 seconds (JVM running for 388.094)
+2024-03-10 16:50:01.779  INFO 20224 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-03-10 16:50:03.336  INFO 20224 --- [restartedMain] com.banne.MainApplication                : Starting MainApplication using Java 17.0.10 on BanneTien with PID 20224 (G:\LearningText\15.BackendTemplate\BackendTemplate\target\classes started by 86188 in G:\LearningText\15.BackendTemplate)
+2024-03-10 16:50:03.337  INFO 20224 --- [restartedMain] com.banne.MainApplication                : No active profile set, falling back to 1 default profile: "dev"
+2024-03-10 16:50:03.527  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:03.527  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+2024-03-10 16:50:03.530  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Elasticsearch repository interfaces.
+2024-03-10 16:50:03.531  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:03.531  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+2024-03-10 16:50:03.533  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Reactive Elasticsearch repository interfaces.
+2024-03-10 16:50:03.535  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2024-03-10 16:50:03.535  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-03-10 16:50:03.538  INFO 20224 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2024-03-10 16:50:03.651  INFO 20224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2024-03-10 16:50:03.651  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.37] using APR version [1.7.4].
+2024-03-10 16:50:03.651  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true].
+2024-03-10 16:50:03.651  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2024-03-10 16:50:03.652  INFO 20224 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1u  30 May 2023]
+2024-03-10 16:50:03.652  INFO 20224 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-10 16:50:03.652  INFO 20224 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2024-03-10 16:50:03.672  INFO 20224 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-10 16:50:03.672  INFO 20224 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 334 ms
+2024-03-10 16:50:04.009  INFO 20224 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-03-10 16:50:04.075  INFO 20224 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
+2024-03-10 16:50:04.193  WARN 20224 --- [restartedMain] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2024-03-10 16:50:04.280  INFO 20224 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2024-03-10 16:50:04.280  INFO 20224 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Documentation plugins bootstrapped
+2024-03-10 16:50:04.281  INFO 20224 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 2 custom documentation plugin(s)
+2024-03-10 16:50:04.285  INFO 20224 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2024-03-10 16:50:04.287  INFO 20224 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2024-03-10 16:50:04.314  INFO 20224 --- [restartedMain] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2024-03-10 16:50:04.315  INFO 20224 --- [restartedMain] com.banne.MainApplication                : Started MainApplication in 0.999 seconds (JVM running for 390.632)
+2024-03-10 16:50:04.316  INFO 20224 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

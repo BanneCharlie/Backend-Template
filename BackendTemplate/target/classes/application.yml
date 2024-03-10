@@ -100,8 +100,8 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"
 # 输出到文件
-  file:
-    path: G:\LearningText\15.BackendTemplate\BackendTemplate\log
+#  file:
+#    path: G:\LearningText\15.BackendTemplate\BackendTemplate\log
 
 
 # todo COS腾讯云对象存储   OSS阿里云对象存储  Minio本地对象存储

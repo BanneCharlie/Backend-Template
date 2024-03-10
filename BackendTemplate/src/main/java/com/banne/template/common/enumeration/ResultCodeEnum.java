@@ -25,9 +25,10 @@ public enum ResultCodeEnum {
     ACCOUNT_STOP( 216, "账号已停用"),
     STOCK_LESS( 219, "库存不足"),
 
-    SAVE_DB_ERROR(223,"存储数据库失败")
+    SAVE_DB_ERROR(223,"存储数据库失败"),
 
-    ;
+    ADD_NULL(301,"添加的信息为空" ),
+    ADD_FAIL(302, "添加失败");
 
     private Integer code ;      // 业务状态码
     private String message ;    // 响应消息

@@ -5,7 +5,9 @@ import com.banne.template.common.enumeration.ResultCodeEnum;
 import com.banne.template.common.exception.BusinessException;
 import com.banne.template.common.result.Result;
 import com.banne.template.model.dto.UserLoginRequest;
+import com.banne.template.model.dto.UserMessageRequest;
 import com.banne.template.model.dto.UserRegisterRequest;
+import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
 import com.banne.template.service.UserService;
 import io.swagger.annotations.Api;
@@ -69,15 +71,21 @@ public class UserController {
         if (StringUtils.isAnyBlank(userAccount, userPassword, checkPassword)) {
             return null;
         }
-        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        Long result = userService.userRegister(userAccount, userPassword, checkPassword);
         return Result.build(result,ResultCodeEnum.SUCCESS);
     }
 
 
-    @GetMapping
     @Logging
-    @ApiOperation(value = "获取用户列表")
-    public Result<String> getUserList() {
-        return Result.build("获取用户列表",ResultCodeEnum.SUCCESS);
+    @GetMapping("/add")
+    @ApiOperation(value = "用户的添加")
+    public Result<Long> userAdd(@RequestBody UserMessageRequest userMessageRequest, HttpServletRequest request) {
+        if (ObjectUtils.isEmpty(userMessageRequest)){
+            throw new BusinessException(ResultCodeEnum.ADD_NULL);
+        }
+
+        Long result = userService.userAdd(userMessageRequest);
+
+        return Result.build(result,ResultCodeEnum.SUCCESS);
     }
 }

@@ -6,6 +6,7 @@ import com.banne.template.common.exception.BusinessException;
 import com.banne.template.common.properties.JwtProperties;
 import com.banne.template.common.utils.JwtUtil;
 import com.banne.template.mapper.UserMapper;
+import com.banne.template.model.dto.UserMessageRequest;
 import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
 import com.banne.template.service.UserService;
@@ -93,7 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public long userRegister(String userAccount, String userPassword, String checkPassword) {
+    public Long userRegister(String userAccount, String userPassword, String checkPassword) {
         // 1. 校验
         if (userAccount.length() < 4) {
             throw new BusinessException(ResultCodeEnum.USER_ACCOUNT_FORMAT);
@@ -130,6 +131,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 4. 返回存储用户的id
         return realUser.getId();
     }
+
+    @Override
+    public Long userAdd(UserMessageRequest userMessageRequest) {
+        // 1.获取需要插入的数据  默认密码为 12345678
+        User user = User.builder()
+                .userAccount(userMessageRequest.getUserAccount())
+                .userPassword(DigestUtils.md5DigestAsHex((SALT + (userMessageRequest.getUserPassword())).getBytes()))
+                .userName(userMessageRequest.getUserName())
+                .userAvatar(userMessageRequest.getUserAvatar())
+                .userRole(userMessageRequest.getUserRole()).build();
+        boolean result = this.save(user);
+        if (!result){
+            throw new BusinessException(ResultCodeEnum.ADD_FAIL);
+        }
+        return user.getId();
+    }
+
 
     /**
      * 获取登录用户信息 封装返回给前台

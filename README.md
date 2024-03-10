@@ -32,12 +32,13 @@
   - 身份验证成功后,将当前用户的Id存放到 ThreadLocal中方便当前整个线程的使用
   - 将生成的JWT令牌传递给前端后,需要前端为每个需要校验的请求添加JWT令牌在请求头中的Authorization中;
 - Redis中Key - Value值的序列化和反序列化 --> RedisConfig √
-- 记录日志 存储在当前文件夹下,规定日志的记录格式 -->  创建@Logging注解  LogInterceptor  √
+- 记录日志 存储在当前文件夹下,规定日志的记录格式 -->  创建@Logging注解  LogAspect  √
   - 记录下@Logging注解标注的方法被哪些用户使用,给出Warn警告
 - Easy Excel 表格处理 
+- OSS 阿里云图片存储
 - 自定义权限注解 + 全局校验 (暂定处理)
 
 *业务功能 :*
 - 用户的登录  注册   √
 - 查询
-- @Logging 更新   @Logging 删除   @Logging 添加  @Logging注解进行监视操作
+- @Logging 更新   @Logging 删除   @Logging 添加 √  @Logging注解进行监视操作
