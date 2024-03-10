@@ -8,4 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserService extends IService<User>{
     LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
+
+    long userRegister(String userAccount, String userPassword, String checkPassword);
 }

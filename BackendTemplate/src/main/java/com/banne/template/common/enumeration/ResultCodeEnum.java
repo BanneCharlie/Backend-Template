@@ -14,11 +14,18 @@ public enum ResultCodeEnum {
     USER_NOT_EXIST(222,"用户不存在"),
     USER_NAME_IS_EXISTS(209 , "用户名已经存在"),
 
+    USER_REGISTER_NULL(220,"请输入正确的用户注册信息"),
+    USER_ACCOUNT_FORMAT(220,"请输入正确的账号"),
+    USER_PASSWORD_FORMAT(220,"请输入正确的密码"),
+    USER_CHECK_PASSWORD_FORMAT(220,"请输入正确的确认密码"),
+
     SYSTEM_ERROR(9999 , "您的网络有问题请稍后重试"),
     NODE_ERROR( 217, "该节点下有子节点，不可以删除"),
     DATA_ERROR(204, "数据异常"),
     ACCOUNT_STOP( 216, "账号已停用"),
-    STOCK_LESS( 219, "库存不足")
+    STOCK_LESS( 219, "库存不足"),
+
+    SAVE_DB_ERROR(223,"存储数据库失败")
 
     ;
 

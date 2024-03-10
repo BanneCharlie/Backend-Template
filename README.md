@@ -22,8 +22,8 @@
 *业务特性 :*
 - Spring MVC   
   - 全局异常处理器 -->  GlobalExceptionHandler 自定义异常 BusinessException √
-  - 全局跨域处理  -->   CorsConfig
-  - 全局请求拦截器  -->  GlobalInterceptor   InterceptorConfig
+  - 全局跨域处理  -->   CorsConfig  √
+  - 全局请求拦截器  -->  GlobalInterceptor   InterceptorConfig  √
 - ENUM类  自定义错误码  -->  ResultCodeEnum   √
 - 封装通用响应类  -->  Result   √
 - Swagger + Knife4j 接口文档  --> Knife4jConfig  √

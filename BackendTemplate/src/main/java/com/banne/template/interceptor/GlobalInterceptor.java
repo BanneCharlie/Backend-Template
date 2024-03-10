@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GlobalInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
-
-        log.info("PreHandling  拦截成功!");
+        log.info("未登录用户进行拦截!");
         return true;
     }
 }
