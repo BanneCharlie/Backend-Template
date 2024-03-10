@@ -1,5 +1,6 @@
-package com.banne.template.interceptor;
+package com.banne.template.aspect;
 
+import com.banne.template.common.context.BaseContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,12 +18,12 @@ import java.util.UUID;
 @Aspect
 @Component
 @Slf4j
-public class LogInterceptor {
+public class LogAspect {
 
     /**
-     * 执行拦截
+     * 执行日志 AOP
      */
-    @Around("execution(* com.banne.template.controller.*.*(..))")
+    @Around("execution(* com.banne.template.controller.*.*(..)) && @annotation(com.banne.template.annotation.Logging)")
     public Object doInterceptor(ProceedingJoinPoint point) throws Throwable {
         // 计时
         StopWatch stopWatch = new StopWatch();
@@ -36,9 +37,13 @@ public class LogInterceptor {
         // 获取请求参数
         Object[] args = point.getArgs();
         String reqParam = "[" + StringUtils.join(args, ", ") + "]";
+        // 获取当前操作的用户id
+        Long currentUserId = BaseContext.getCurrentId();
+        // 获取到操作的方法名称
+        String methodName = point.getSignature().getName();
         // 输出请求日志
-        log.info("request start，id: {}, path: {}, ip: {}, params: {}", requestId, url,
-                httpServletRequest.getRemoteHost(), reqParam);
+        log.info("监视重要的操作 request start，id: {}, path: {}, ip: {}, params: {}, userId: {},操作的方法: {}", requestId, url,
+                httpServletRequest.getRemoteHost(), reqParam,currentUserId,methodName);
 
         // 执行原方法
         Object result = point.proceed();

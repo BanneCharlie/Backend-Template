@@ -87,9 +87,22 @@ knife4j:
         api-rule-resources:
           - com.banne.controller
 
+# Jwt令牌的通用配置
 jwt:
   key: harvey is my beset friends, what can i say?
   ttlMillis: 7200000
+
+# 设置日志级别
+logging:
+  level:
+    root: INFO
+# 输出日志格式
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"
+# 输出到文件
+  file:
+    path: G:\LearningText\15.BackendTemplate\BackendTemplate\log
+
 
 # todo COS腾讯云对象存储   OSS阿里云对象存储  Minio本地对象存储
 #cos:

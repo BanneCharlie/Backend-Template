@@ -1,5 +1,6 @@
 package com.banne.template.controller;
 
+import com.banne.template.annotation.Logging;
 import com.banne.template.common.enumeration.ResultCodeEnum;
 import com.banne.template.common.exception.BusinessException;
 import com.banne.template.common.result.Result;
@@ -74,6 +75,7 @@ public class UserController {
 
 
     @GetMapping
+    @Logging
     @ApiOperation(value = "获取用户列表")
     public Result<String> getUserList() {
         return Result.build("获取用户列表",ResultCodeEnum.SUCCESS);
