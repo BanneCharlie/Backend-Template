@@ -25,7 +25,7 @@ public class UserMessageRequest implements Serializable {
     /**
      * 密码
      */
-    private String userPassword = "12345678";
+    private String userPassword;
 
     /**
      * 用户头像

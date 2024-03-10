@@ -11,6 +11,7 @@ import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
 import com.banne.template.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -135,6 +136,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public Long userAdd(UserMessageRequest userMessageRequest) {
         // 1.获取需要插入的数据  默认密码为 12345678
+        userMessageRequest.setUserPassword("12345678");
         User user = User.builder()
                 .userAccount(userMessageRequest.getUserAccount())
                 .userPassword(DigestUtils.md5DigestAsHex((SALT + (userMessageRequest.getUserPassword())).getBytes()))
@@ -145,6 +147,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (!result){
             throw new BusinessException(ResultCodeEnum.ADD_FAIL);
         }
+        return user.getId();
+    }
+
+    @Override
+    public Long userRemove(long id) {
+        // 根据当前id查询当前用户是否存在
+        QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
+        objectQueryWrapper.eq("id", id);
+        User user = this.baseMapper.selectOne(objectQueryWrapper);
+        if (ObjectUtils.isEmpty(user)){
+            throw new BusinessException(ResultCodeEnum.REMOVE_ERROR);
+        }
+
+        boolean result = this.removeById(user.getId());
+
+        if (!result){
+            throw new BusinessException(ResultCodeEnum.REMOVE_ERROR);
+        }
+
         return user.getId();
     }
 

@@ -88,4 +88,12 @@ public class UserController {
 
         return Result.build(result,ResultCodeEnum.SUCCESS);
     }
+
+    @Logging
+    @PostMapping("/remove")
+    @ApiOperation(value = "用户的删除")
+    public Result<Long> userRemove(@RequestParam("id")long id, HttpServletRequest request) {
+        Long result = userService.userRemove(id);
+        return Result.build(result,ResultCodeEnum.SUCCESS);
+    }
 }

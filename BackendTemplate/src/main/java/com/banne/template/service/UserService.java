@@ -13,4 +13,6 @@ public interface UserService extends IService<User>{
     Long userRegister(String userAccount, String userPassword, String checkPassword);
 
     Long userAdd(UserMessageRequest userMessageRequest);
+
+    Long userRemove(long id);
 }

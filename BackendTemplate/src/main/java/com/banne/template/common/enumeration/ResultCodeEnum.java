@@ -28,7 +28,9 @@ public enum ResultCodeEnum {
     SAVE_DB_ERROR(223,"存储数据库失败"),
 
     ADD_NULL(301,"添加的信息为空" ),
-    ADD_FAIL(302, "添加失败");
+    ADD_FAIL(302, "添加失败"),
+
+    REMOVE_ERROR(400,"删除失败" );
 
     private Integer code ;      // 业务状态码
     private String message ;    // 响应消息
