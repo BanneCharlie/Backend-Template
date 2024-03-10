@@ -15,4 +15,6 @@ public interface UserService extends IService<User>{
     Long userAdd(UserMessageRequest userMessageRequest);
 
     Long userRemove(long id);
+
+    Long userUpdate(UserMessageRequest userMessageRequest);
 }

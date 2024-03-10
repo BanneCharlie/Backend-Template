@@ -96,4 +96,16 @@ public class UserController {
         Long result = userService.userRemove(id);
         return Result.build(result,ResultCodeEnum.SUCCESS);
     }
+
+    @Logging
+    @PostMapping("/modify")
+    @ApiOperation(value = "用户的修改")
+    public Result<Long> userUpdate(@RequestBody UserMessageRequest userMessageRequest, HttpServletRequest request) {
+        if (ObjectUtils.isEmpty(userMessageRequest)){
+            throw new BusinessException(ResultCodeEnum.MODIFY_NULL);
+        }
+        Long result = userService.userUpdate(userMessageRequest);
+
+        return Result.build(result,ResultCodeEnum.SUCCESS);
+    }
 }

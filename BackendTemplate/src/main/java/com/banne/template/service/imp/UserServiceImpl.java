@@ -11,9 +11,9 @@ import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
 import com.banne.template.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.realm.UserDatabaseRealm;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -166,6 +166,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ResultCodeEnum.REMOVE_ERROR);
         }
 
+        return user.getId();
+    }
+
+    @Override
+    public Long userUpdate(UserMessageRequest userMessageRequest) {
+        // 根据传递的Id 获取修改的用户信息 将不为空的数据进行修改
+        QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
+        objectQueryWrapper.eq("id", userMessageRequest.getId());
+        User user = this.baseMapper.selectOne(objectQueryWrapper);
+        if (ObjectUtils.isEmpty(user)){
+            throw new BusinessException(ResultCodeEnum.MODIFY_NULL);
+        }
+
+        if(userMessageRequest.getUserAccount() != null){
+            user.setUserAccount(userMessageRequest.getUserAccount());
+        }
+        if (userMessageRequest.getUserRole() != null){
+            user.setUserRole(userMessageRequest.getUserRole());
+        }
+        if (userMessageRequest.getUserName() != null){
+            user.setUserName(userMessageRequest.getUserName());
+        }
+        if (userMessageRequest.getUserPassword() != null){
+            user.setUserPassword(DigestUtils.md5DigestAsHex((SALT + (userMessageRequest.getUserPassword())).getBytes()));
+        }
+        if (userMessageRequest.getUserAvatar()!= null){
+            user.setUserAvatar(userMessageRequest.getUserAvatar());
+        }
+
+        boolean result = this.updateById(user);
+        if (!result){
+            throw new BusinessException(ResultCodeEnum.MODIFY_ERROR);
+        }
         return user.getId();
     }
 
