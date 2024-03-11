@@ -1,21 +1,29 @@
 package com.banne.template.service.imp;
 
 
+import cn.hutool.db.Page;
+import com.alibaba.excel.util.StringUtils;
 import com.banne.template.common.enumeration.ResultCodeEnum;
 import com.banne.template.common.exception.BusinessException;
 import com.banne.template.common.properties.JwtProperties;
 import com.banne.template.common.utils.JwtUtil;
 import com.banne.template.mapper.UserMapper;
+import com.banne.template.model.dto.PageQueryRequest;
 import com.banne.template.model.dto.UserMessageRequest;
 import com.banne.template.model.entity.User;
 import com.banne.template.model.vo.LoginUserVO;
+import com.banne.template.model.vo.UserVO;
 import com.banne.template.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.realm.UserDatabaseRealm;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -23,7 +31,9 @@ import org.springframework.util.DigestUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
 * @author 86188
@@ -91,7 +101,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         redisTemplate.opsForValue().set("jwtToken: ",jwtToken);
 
         // 4. 返回结果
-        return this.getLoginUserVO(user,jwtToken);
+        return this.getLoginUserVO(user);
     }
 
     @Override
@@ -203,19 +213,46 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
 
+    @Override
+    public UserVO userQueryById(long id, HttpServletRequest request) {
+        User user = this.baseMapper.selectById(id);
+        if (ObjectUtils.isEmpty(user)) {
+            throw new BusinessException(ResultCodeEnum.USER_NOT_EXISTS);
+        }
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        return userVO;
+    }
+
+    @Override
+    public PageInfo<UserVO> userQuery(PageQueryRequest pageQueryRequest) {
+        PageHelper.startPage(pageQueryRequest.getPage(), pageQueryRequest.getPageSize());
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.like(StringUtils.isNotBlank(pageQueryRequest.getUserAccount()),"userAccount",pageQueryRequest.getUserAccount());
+        userQueryWrapper.like(StringUtils.isNotBlank(pageQueryRequest.getUserName()),"userAccount",pageQueryRequest.getUserName());
+        userQueryWrapper.eq(StringUtils.isNotBlank(pageQueryRequest.getUserRole()),"userRole",pageQueryRequest.getUserRole());
+        List<User> users = this.baseMapper.selectList(userQueryWrapper);
+        List<UserVO>  userVos= users.stream().map(user -> {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(user, userVO);
+            return userVO;
+        }).collect(Collectors.toList());
+        return new PageInfo<UserVO>(userVos);
+    }
+
+
     /**
      * 获取登录用户信息 封装返回给前台
      *
      * @param user
      * @return
      */
-    public LoginUserVO getLoginUserVO(User user,String jwtToken) {
+    public LoginUserVO getLoginUserVO(User user) {
         if (ObjectUtils.isEmpty(user)) {
             return null;
         }
         LoginUserVO loginUserVO = new LoginUserVO();
         BeanUtils.copyProperties(user, loginUserVO);
-        loginUserVO.setJwtToken(jwtToken);
         return loginUserVO;
     }
 }

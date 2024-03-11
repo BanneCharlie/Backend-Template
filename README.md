@@ -40,5 +40,5 @@
 
 *业务功能 :*
 - 用户的登录  注册   √
-- 查询
+- 查询 √
 - @Logging 更新 √  @Logging 删除 √  @Logging 添加 √  @Logging注解进行监视操作

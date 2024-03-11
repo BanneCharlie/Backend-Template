@@ -33,7 +33,7 @@ public enum ResultCodeEnum {
     REMOVE_ERROR(400,"删除失败" ),
 
     MODIFY_NULL(401,"修改的信息为空" ),
-    MODIFY_ERROR(402, "修改操作失败");
+    MODIFY_ERROR(402, "修改操作失败"), LOGOUT(200,"用户登出" ), USER_NOT_EXISTS(333,"用户不存在" );
 
     private Integer code ;      // 业务状态码
     private String message ;    // 响应消息
